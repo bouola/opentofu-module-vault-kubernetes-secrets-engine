@@ -41,3 +41,8 @@ variable "vault_kubernetes_backend_roles_path" {
   default     = null
   description = "Path to a directory of JSON files defining Kubernetes CI roles. Same pattern as vault_jwt_auth_backend_roles_path."
 }
+
+variable "vault_kubernetes_ca_cert_kv_full_path" {
+  type        = string
+  description = "Vault KV full path(with mounts for policy) where the decoded CA cert is stored. Ex: secrets/data/infra/kubernetes/main-01-cluster-prod/ca-cert."
+}

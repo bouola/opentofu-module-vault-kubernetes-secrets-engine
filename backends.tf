@@ -61,5 +61,10 @@ resource "vault_policy" "kubernetes_policies" {
     path "${var.kubernetes_cluster_mount_path}/creds/${vault_kubernetes_secret_backend_role.kubernetes_backend_roles[each.key].name}" {
       capabilities = ["create", "update"]
     }
+
+    # Read cluster CA cert
+    path "${var.vault_kubernetes_ca_cert_kv_full_path}" {
+      capabilities = ["read"]
+    }
   EOT
 }
