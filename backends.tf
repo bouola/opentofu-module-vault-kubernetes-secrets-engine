@@ -30,8 +30,8 @@ resource "vault_kubernetes_secret_backend_role" "kubernetes_backend_roles" {
 
   allowed_kubernetes_namespaces = each.value.allowed_kubernetes_namespaces
 
-  token_ttl     = lookup(each.value, "token_ttl", "20m")
-  token_max_ttl = lookup(each.value, "token_max_ttl", "30m")
+  token_default_ttl = lookup(each.value, "token_default_ttl", 1200)
+  token_max_ttl     = lookup(each.value, "token_max_ttl", 1800)
 
   # Vault expects a valid YAML string for generated_role_rules
   generated_role_rules = yamlencode({
@@ -46,6 +46,10 @@ resource "vault_kubernetes_secret_backend_role" "kubernetes_backend_roles" {
 
   # Namespace-scoped Role, not ClusterRole
   kubernetes_role_type = "Role"
+
+  depends_on = [
+    vault_kubernetes_secret_backend.kubernetes_backend_config
+  ]
 }
 
 # ------------------------------------------------------------------------------

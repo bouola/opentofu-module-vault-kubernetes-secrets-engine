@@ -24,8 +24,8 @@ variable "vault_kubernetes_backend_roles" {
   type = list(object({
     role_name                     = string
     allowed_kubernetes_namespaces = list(string)
-    token_ttl                     = optional(string, "20m")
-    token_max_ttl                 = optional(string, "30m")
+    token_default_ttl             = optional(number, 1200)
+    token_max_ttl                 = optional(number, 1800)
     rbac_rules = list(object({
       api_groups = list(string)
       resources  = list(string)
