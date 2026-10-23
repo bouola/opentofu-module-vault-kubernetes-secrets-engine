@@ -19,7 +19,7 @@ run = "tofu fmt --recursive"
 experimental = true
 
 [hooks.postinstall]
-script = """
+run = """
 #!/usr/bin/env bash
 pre-commit install --install-hooks
 """
